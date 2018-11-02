@@ -12,6 +12,7 @@ body {
   box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   width: 95vw;
+  /* min-width: 970px; */
   padding: 5px;
 }
 
@@ -31,13 +32,19 @@ body {
   text-align: center;
 }
 
-/* .title-div p {
-  font-size: 0.6em.
-} */
+.title-div p {
+  font-size: 0.9em;
+}
 
 svg {
   display: block;
   margin: auto;
+}
+
+.state-borders {
+  /* stroke: #000;
+  stroke-width: 1px; */
+  border: 1px solid #000;
 }
 
 .counties:hover {

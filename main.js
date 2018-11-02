@@ -49,7 +49,7 @@ req.onload = () => {
   }
   run()
 }
-// console.log(countySet)
+
 // ********************RUN FUNCTION*********************
 
 const run = () => {
@@ -78,13 +78,13 @@ const run = () => {
       .data(topojson.feature(us, us.objects.counties).features)
       .enter()
       .append("path")
-      .attr("class", "counties")
+      .attr("class", "county")
       .attr("d", path)
       .attr("fill", (d) => getColor(d.id))
       .attr("data-fips", (d) => d.id)
       .attr("data-education", (d) => getEdu(d.id))
       // tooltip on mouseover
-      .on("mousemove", (d) => {
+      .on("mouseover", (d) => {
         tooltip.attr("data-education", getEdu(d.id))
           .style("opacity", 0.9)
           .style("left", getX(d3.event.pageX) + 0 + "px")
@@ -100,11 +100,11 @@ const run = () => {
     // map legend
     svg.append("g")
       .selectAll("rect")
-      .attr("id", "legend")
       .data(legendArr)
       .enter()
       .append("rect")
       .attr("class", "legend-rect")
+      .attr("id", "legend")
       .attr("height", 15)
       .attr("width", 35)
       .attr("x", (d, i) => 400 + (i * 38))
@@ -168,7 +168,7 @@ const getText = (str) => {
   for (let i = 0; i < dataSet.length; i++) {
     if (str == dataSet[i].fips) {
       let bcs = dataSet[i].bachelorsOrHigher
-      out = dataSet[i].area_name + ", " + dataSet[i].state + "<br>Population: " + pop + "<br>College: " + bcs + "%"
+      out = dataSet[i].area_name + ", " + dataSet[i].state + "<br>College: " + bcs + "%"
     }
   }
   return out

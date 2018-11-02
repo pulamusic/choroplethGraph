@@ -1,0 +1,56 @@
+body {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  background-color: #eae3d3;
+}
+
+.map-div {
+  margin: 30px auto;
+  display: block;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 95vw;
+  padding: 5px;
+}
+
+.jumbotron h1 {
+  font-size: 2.5em;
+}
+
+.jumbotron h2 {
+  font-size: 1.5em;
+}
+
+.title-div {
+  text-align: center;
+}
+
+/* .title-div p {
+  font-size: 0.6em.
+} */
+
+svg {
+  display: block;
+  margin: auto;
+}
+
+.counties:hover {
+  fill: #eae3d3;
+  stroke: #000;
+  stroke-width: 0.5px;
+}
+
+footer p {
+  text-align: center;
+  margin: 5px 0;
+}
+
+footer .fa-github {
+  color: #000;
+}
+
+footer .fa-facebook-square {
+  color: #4267B2;
+}

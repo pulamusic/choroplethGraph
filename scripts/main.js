@@ -26,20 +26,10 @@ const legendArr = [
   [45, colors[8]],
   [50, colors[9]],
   [55, colors[10]],
-  ["56+", colors[11]],
-
+  ["56+", colors[11]]
 ]
 
-// const margin = {
-//   top: 5,
-//   bottom: 80,
-//   left: 120,
-//   right: 40
-// }
-//
-// const width = 1200 - margin.left - margin.right
-// const height = 700 - margin.top - margin.bottom
-
+let dataSet
 let countySet
 
 // *********************DATA REQUEST********************
@@ -47,17 +37,19 @@ let countySet
 const req = new XMLHttpRequest()
 req.open("GET", educUrl, true)
 req.send()
+
 req.onload = () => {
   dataSet = JSON.parse(req.responseText)
 
   req.open("GET", countyUrl, true)
   req.send()
+
   req.onload = () => {
     countySet = csvJSON(req.responseText)
   }
   run()
 }
-
+// console.log(countySet)
 // ********************RUN FUNCTION*********************
 
 const run = () => {
@@ -69,7 +61,7 @@ const run = () => {
     .attr("width", 960)
     .attr("height", 600)
 
-  const tooltip = d3.select("body")
+  let tooltip = d3.select("body")
     .append("div")
     .attr("class", "tooltip")
     .attr("id", "tooltip")
@@ -92,9 +84,9 @@ const run = () => {
       .attr("data-fips", (d) => d.id)
       .attr("data-education", (d) => getEdu(d.id))
       // tooltip on mouseover
-      .on("mouseover", (d) => {
+      .on("mousemove", (d) => {
         tooltip.attr("data-education", getEdu(d.id))
-          .attr("opacity", 0.9)
+          .style("opacity", 0.9)
           .style("left", getX(d3.event.pageX) + 0 + "px")
           .style("top", d3.event.pageY - 105 + "px")
           .html(getText(d.id))
@@ -102,7 +94,7 @@ const run = () => {
       // tooltip mouseout
       .on("mouseout", (d) => {
         d3.select("#tooltip")
-          .attr("opacity", 0)
+          .style("opacity", 0)
       })
 
     // map legend
@@ -137,12 +129,12 @@ const run = () => {
     // add county borders
     svg.append("path")
       .attr("class", "county-borders")
-      .attr("d", path(topojson.mesh(us, us.objects.counties, (a, b) => a !== b)))
+      .attr("d", path(topojson.mesh(us, us.objects.counties, (a, b) => {a !== b})))
 
     // add state borders
     svg.append("path")
       .attr("class", "state-borders")
-      .attr("d", path(topojson.mesh(us, us.objects.states, (a, b) => a !== b)))
+      .attr("d", path(topojson.mesh(us, us.objects.states, (a, b) => {a !== b})))
 
   }) // end of JSON call
 
